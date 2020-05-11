@@ -1,0 +1,89 @@
+{
+  "generics": {
+    "muscle_groups": {
+      "abs": "Abdômen",
+      "back": "Costas",
+      "biceps": "Bíceps",
+      "calves": "Panturrilhas",
+      "chest": "Peito",
+      "forearms": "Antebraços",
+      "glutes": "Glúteos",
+      "hamstring": "Isquiotibiais",
+      "quads": "Quadríceps",
+      "shoulder": "Ombros",
+      "triceps": "Tríceps"
+    },
+    "rules": {
+      "is_required": "é obrigatório",
+      "must_be_valid": "deve ser válido",
+      "only_letters_and_numbers": "deve conter apenas letras e números",
+      "password_must_match": "A senha deve corresponder"
+    }
+  },
+  "components": {
+    "header": {
+      "welcome": "Bem vindo",
+      "dashboard": "Visão geral",
+      "trainings": "Treinos",
+      "account": "Minha conta",
+      "logout": "Sair"
+    }
+  },
+  "views": {
+    "login": {
+      "username_or_email": "Usuário ou email",
+      "password": "Senha",
+      "log_in": "Entrar",
+      "question": "Não possui uma conta?",
+      "sign_up": "Cadastrar"
+    },
+    "register": {
+      "username": "Usuário",
+      "name": "Nome",
+      "email": "Email",
+      "password": "Senha",
+      "confirm_password": "Confirmar senha",
+      "sign_up": "Cadastrar",
+      "question": "Já tem uma conta?",
+      "log_in": "Entrar"
+    },
+    "dashboard": {
+      "frequency": {
+        "title": "Frequência",
+        "trained_days": "Dias treinados",
+        "days_in_month": "Dias no mês"
+      },
+      "muscle_per_month": {
+        "title": "Músculo por mês",
+        "quantity": "Quantidade"
+      },
+      "muscle_per_year": {
+        "title": "Músculo por ano",
+        "quantity": "Quantidade"
+      }
+    },
+    "trainings": {
+      "feedback": {
+        "positive": "Parabéns! Você treinou nesse dia :)",
+        "negative": "Ah não! Você não treinou nesse dia :("
+      },
+      "question": "Quais grupos musculares você treinou?"
+    },
+    "account": {
+      "edit_profile": {
+        "title": "Editar perfil",
+        "username": "Usuário",
+        "name": "Nome",
+        "email": "Email",
+        "save": "Salvar"
+      },
+      "change_password": {
+        "title": "Alterar senha",
+        "current_password": "Senha atual",
+        "new_password": "Nova senha",
+        "confirm_new_password": "Confirmar nova senha",
+        "save": "Salvar"
+      }
+    }
+  }
+}

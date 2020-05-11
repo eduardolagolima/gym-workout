@@ -1,0 +1,89 @@
+{
+  "generics": {
+    "muscle_groups": {
+      "abs": "Abs",
+      "back": "Back",
+      "biceps": "Biceps",
+      "calves": "Calves",
+      "chest": "Chest",
+      "forearms": "Forearms",
+      "glutes": "Glutes",
+      "hamstring": "Hamstring",
+      "quads": "Quads",
+      "shoulder": "Shoulder",
+      "triceps": "Triceps"
+    },
+    "rules": {
+      "is_required": "is required",
+      "must_be_valid": "must be valid",
+      "only_letters_and_numbers": "can contain only letters and numbers",
+      "password_must_match": "Password must match"
+    }
+  },
+  "components": {
+    "header": {
+      "welcome": "Welcome",
+      "dashboard": "Dashboard",
+      "trainings": "Trainings",
+      "account": "My account",
+      "logout": "Logout"
+    }
+  },
+  "views": {
+    "login": {
+      "username_or_email": "Username or Email",
+      "password": "Password",
+      "log_in": "Log in",
+      "question": "Don't have an account?",
+      "sign_up": "Sign up"
+    },
+    "register": {
+      "username": "Username",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "sign_up": "Sign up",
+      "question": "Have an account?",
+      "log_in": "Log in"
+    },
+    "dashboard": {
+      "frequency": {
+        "title": "Frequency",
+        "trained_days": "Trained days",
+        "days_in_month": "Days in month"
+      },
+      "muscle_per_month": {
+        "title": "Muscle per month",
+        "quantity": "Quantity"
+      },
+      "muscle_per_year": {
+        "title": "Muscle per year",
+        "quantity": "Quantity"
+      }
+    },
+    "trainings": {
+      "feedback": {
+        "positive": "Congratulations! You trained on this day :)",
+        "negative": "Oh no! You didn't train this day :("
+      },
+      "question": "What muscle groups did you train?"
+    },
+    "account": {
+      "edit_profile": {
+        "title": "Edit profile",
+        "username": "Username",
+        "name": "Name",
+        "email": "Email",
+        "save": "Save"
+      },
+      "change_password": {
+        "title": "Change Password",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_new_password": "Confirm New Password",
+        "save": "Save"
+      }
+    }
+  }
+}
