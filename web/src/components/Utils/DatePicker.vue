@@ -17,6 +17,7 @@
         v-model="date"
         @input="datepicker = false"
         :max="currentDate().format(this[this.type].sys)"
+        :locale="user.locale.replace('_', '-')"
       ></v-date-picker>
     </v-dialog>
     <v-btn v-else style="pointer-events: none">
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
@@ -61,6 +63,9 @@ export default {
       ptbr: 'YYYY',
     },
   }),
+  computed: {
+    ...mapState(['user']),
+  },
   methods: {
     format(date) {
       return dayjs(date, this[this.type].sys).format(this[this.type].ptbr)
