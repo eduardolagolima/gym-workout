@@ -32,12 +32,10 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import PasswordField from '../../components/Form/PasswordField'
-import ConfirmPasswordField from '../../components/Form/ConfirmPasswordField'
-
-import request from '../../services/request'
-
-import passwordMatchRule from '../../helpers/passwordMatchRule'
+import ConfirmPasswordField from '../../../components/Form/ConfirmPasswordField'
+import PasswordField from '../../../components/Form/PasswordField'
+import passwordMatchRule from '../../../helpers/passwordMatchRule'
+import request from '../../../services/request'
 
 export default {
   name: 'ChangePassword',

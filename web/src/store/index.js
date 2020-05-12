@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
-
 import request from '../services/request'
+
+Vue.use(Vuex)
 
 const getDefaultUserInformation = () => {
   return {

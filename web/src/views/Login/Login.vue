@@ -46,8 +46,8 @@
 <script>
 import { mapActions } from 'vuex'
 
-import UsernameOrEmailField from '../../components/Form/UsernameOrEmailField'
 import PasswordField from '../../components/Form/PasswordField'
+import UsernameOrEmailField from '../../components/Form/UsernameOrEmailField'
 
 export default {
   name: 'Login',

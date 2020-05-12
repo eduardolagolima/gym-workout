@@ -75,10 +75,10 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 
-import HeaderItem from './HeaderItem'
-
 import ButtonDarkMode from '../Utils/ButtonDarkMode'
 import LanguageSelector from '../Utils/LanguageSelector'
+
+import HeaderItem from './HeaderItem'
 
 export default {
   name: 'Header',

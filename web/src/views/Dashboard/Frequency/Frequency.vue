@@ -10,10 +10,9 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import DatePicker from '../../components/Utils/DatePicker'
-import BarChart from '../../components/Chart/BarChart'
-
-import request from '../../services/request'
+import BarChart from '../../../components/Chart/BarChart'
+import DatePicker from '../../../components/Utils/DatePicker'
+import request from '../../../services/request'
 
 export default {
   name: 'Frequency',

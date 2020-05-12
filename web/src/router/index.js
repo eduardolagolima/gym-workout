@@ -2,12 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import store from '../store'
-
+import Account from '../views/Account/Account'
+import Dashboard from '../views/Dashboard/Dashboard'
 import Login from '../views/Login/Login'
 import Register from '../views/Register/Register'
-import Dashboard from '../views/Dashboard/Dashboard'
 import Trainings from '../views/Trainings/Trainings'
-import Account from '../views/Account/Account'
 
 Vue.use(VueRouter)
 

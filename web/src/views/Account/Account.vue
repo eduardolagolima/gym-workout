@@ -20,8 +20,8 @@ import { mapState } from 'vuex'
 
 import Content from '../../components/Html/Content'
 
-import EditProfile from './EditProfile'
-import ChangePassword from './ChangePassword'
+import ChangePassword from './ChangePassword/ChangePassword'
+import EditProfile from './EditProfile/EditProfile'
 
 export default {
   name: 'Account',

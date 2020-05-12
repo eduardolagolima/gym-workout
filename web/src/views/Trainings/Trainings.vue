@@ -37,9 +37,8 @@ import { mapMutations } from 'vuex'
 
 import Content from '../../components/Html/Content'
 import DatePicker from '../../components/Utils/DatePicker'
-
-import request from '../../services/request'
 import muscleGroups from '../../helpers/muscleGroups'
+import request from '../../services/request'
 
 export default {
   name: 'Trainings',

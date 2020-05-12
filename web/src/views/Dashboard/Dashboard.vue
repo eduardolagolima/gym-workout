@@ -25,9 +25,9 @@ import { mapState } from 'vuex'
 
 import Content from '../../components/Html/Content'
 
-import Frequency from './Frequency'
-import MusclePerMonth from './MusclePerMonth'
-import MusclePerYear from './MusclePerYear'
+import Frequency from './Frequency/Frequency'
+import MusclePerMonth from './MusclePerMonth/MusclePerMonth'
+import MusclePerYear from './MusclePerYear/MusclePerYear'
 
 export default {
   name: 'Dashboard',

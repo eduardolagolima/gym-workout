@@ -65,12 +65,11 @@
 <script>
 import { mapActions } from 'vuex'
 
-import UsernameField from '../../components/Form/UsernameField'
-import NameField from '../../components/Form/NameField'
-import EmailField from '../../components/Form/EmailField'
-import PasswordField from '../../components/Form/PasswordField'
 import ConfirmPasswordField from '../../components/Form/ConfirmPasswordField'
-
+import EmailField from '../../components/Form/EmailField'
+import NameField from '../../components/Form/NameField'
+import PasswordField from '../../components/Form/PasswordField'
+import UsernameField from '../../components/Form/UsernameField'
 import passwordMatchRule from '../../helpers/passwordMatchRule'
 
 export default {

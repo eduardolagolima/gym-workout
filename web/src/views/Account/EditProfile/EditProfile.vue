@@ -31,11 +31,10 @@
 <script>
 import { mapMutations, mapActions } from 'vuex'
 
-import UsernameField from '../../components/Form/UsernameField'
-import NameField from '../../components/Form/NameField'
-import EmailField from '../../components/Form/EmailField'
-
-import request from '../../services/request'
+import EmailField from '../../../components/Form/EmailField'
+import NameField from '../../../components/Form/NameField'
+import UsernameField from '../../../components/Form/UsernameField'
+import request from '../../../services/request'
 
 export default {
   name: 'EditProfile',

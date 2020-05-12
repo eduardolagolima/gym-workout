@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DatePicker class="py-3" type="month" @changeDate="month = $event" />
+    <DatePicker class="py-3" type="year" @changeDate="year = $event" />
     <v-card>
       <BarChart :chart-data="chartData" />
     </v-card>
@@ -10,16 +10,15 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import DatePicker from '../../components/Utils/DatePicker'
-import BarChart from '../../components/Chart/BarChart'
-
-import request from '../../services/request'
-import muscleGroups from '../../helpers/muscleGroups'
+import BarChart from '../../../components/Chart/BarChart'
+import DatePicker from '../../../components/Utils/DatePicker'
+import muscleGroups from '../../../helpers/muscleGroups'
+import request from '../../../services/request'
 
 export default {
-  name: 'MusclePerMonth',
+  name: 'MusclePerYear',
   data: () => ({
-    month: null,
+    year: null,
     chartData: {},
   }),
   computed: {
@@ -33,24 +32,24 @@ export default {
   },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
-    async getMusclePerMonth() {
+    async getMusclePerYear() {
       try {
         const response = await request(
           'get',
-          `/dashboard/muscle/month/${this.month}`
+          `/dashboard/muscle/year/${this.year}`
         )
 
-        const musclePerMonth = response.data.musclePerMonth
+        const musclePerYear = response.data.musclePerYear
 
         const quantities = this.muscleGroups.map(({ value }) =>
-          musclePerMonth[value] ? musclePerMonth[value] : 0
+          musclePerYear[value] ? musclePerYear[value] : 0
         )
 
         this.chartData = {
           labels: this.muscleGroups.map(({ description }) => description),
           datasets: [
             {
-              label: this.$t('views.dashboard.muscle_per_month.quantity'),
+              label: this.$t('views.dashboard.muscle_per_year.quantity'),
               backgroundColor: '#3f67a8',
               data: quantities,
             },
@@ -62,8 +61,8 @@ export default {
     },
   },
   watch: {
-    month() {
-      this.getMusclePerMonth()
+    year() {
+      this.getMusclePerYear()
     },
   },
 }
