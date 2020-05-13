@@ -19,7 +19,7 @@
         />
       </v-form>
     </v-card-text>
-    <v-divider></v-divider>
+    <v-divider />
     <v-card-actions>
       <v-btn @click="updateProfile" color="primary" :disabled="!validForm">
         {{ $t('views.account.edit_profile.save') }}

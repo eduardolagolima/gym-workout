@@ -38,12 +38,12 @@
                   />
                 </v-form>
               </v-card-text>
-              <v-divider></v-divider>
+              <v-divider />
               <v-card-actions>
                 <v-btn @click="register" color="primary" :disabled="!validForm">
                   {{ $t('views.register.sign_up') }}
                 </v-btn>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <p class="mb-0">
                   {{ $t('views.register.question') }}
                   <router-link to="/login">{{
