@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://192.168.0.122:3333'
+const apiUrl = process.env.VUE_APP_API_URL || 'http://localhost:3333'
 
 async function request(method, url, data) {
   const { token } = JSON.parse(localStorage.getItem('user')) || {}
@@ -8,7 +8,7 @@ async function request(method, url, data) {
   try {
     const response = await axios({
       method,
-      url: baseUrl + url,
+      url: apiUrl + url,
       headers: {
         'Content-Type': 'application/json',
         ...(token && {
