@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-form v-model="validForm">
+      <v-form ref="form" v-model="validForm">
         <PasswordField
           id="current-password"
           :label="$t('views.account.change_password.current_password')"
@@ -70,6 +70,7 @@ export default {
           confirmNewPassword,
         })
 
+        this.$refs.form.reset()
         this.SHOW_SNACKBAR({ show: true, content: response.message })
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
