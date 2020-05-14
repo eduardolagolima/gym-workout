@@ -13,7 +13,7 @@ import { mapMutations } from 'vuex'
 import BarChart from '../../../components/Chart/BarChart'
 import DatePicker from '../../../components/Utils/DatePicker'
 import muscleGroups from '../../../helpers/muscleGroups'
-import request from '../../../services/request'
+import api from '../../../services/api'
 
 export default {
   name: 'MusclePerYear',
@@ -39,13 +39,9 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getMusclePerYear() {
       try {
-        const response = await request(
-          'get',
-          `/dashboard/muscle/year/${this.year}`
-        )
+        const response = await api.get(`/dashboard/muscle/year/${this.year}`)
 
         const musclePerYear = response.data.musclePerYear
-
         const quantities = this.muscleGroups.map(({ value }) =>
           musclePerYear[value] ? musclePerYear[value] : 0
         )

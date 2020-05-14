@@ -38,7 +38,7 @@ import { mapMutations } from 'vuex'
 import Content from '../../components/Html/Content'
 import DatePicker from '../../components/Utils/DatePicker'
 import muscleGroups from '../../helpers/muscleGroups'
-import request from '../../services/request'
+import api from '../../services/api'
 
 export default {
   name: 'Trainings',
@@ -66,7 +66,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getTrainedMuscleGroups() {
       try {
-        const response = await request('get', `/trainings/${this.day}`)
+        const response = await api.get(`/trainings/${this.day}`)
         this.trainedMuscleGroups = response.data.trainedMuscleGroups
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
@@ -74,7 +74,7 @@ export default {
     },
     async updateTrainedMuscleGroups() {
       try {
-        const response = await request('put', `/trainings/${this.day}`, {
+        const response = await api.put(`/trainings/${this.day}`, {
           trainedMuscleGroups: this.trainedMuscleGroups,
         })
         this.trainedMuscleGroups = response.data.trainedMuscleGroups

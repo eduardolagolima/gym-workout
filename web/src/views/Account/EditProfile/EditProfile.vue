@@ -34,7 +34,7 @@ import { mapMutations, mapActions } from 'vuex'
 import EmailField from '../../../components/Form/EmailField'
 import NameField from '../../../components/Form/NameField'
 import UsernameField from '../../../components/Form/UsernameField'
-import request from '../../../services/request'
+import api from '../../../services/api'
 
 export default {
   name: 'EditProfile',
@@ -57,7 +57,7 @@ export default {
     ...mapActions(['editProfile']),
     async getProfile() {
       try {
-        const response = await request('get', '/users')
+        const response = await api.get('/users')
         const user = response.data.user
 
         this.username = user.username

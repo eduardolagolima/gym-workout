@@ -35,7 +35,7 @@ import { mapMutations } from 'vuex'
 import ConfirmPasswordField from '../../../components/Form/ConfirmPasswordField'
 import PasswordField from '../../../components/Form/PasswordField'
 import passwordMatchRule from '../../../helpers/passwordMatchRule'
-import request from '../../../services/request'
+import api from '../../../services/api'
 
 export default {
   name: 'ChangePassword',
@@ -64,7 +64,7 @@ export default {
       try {
         const { currentPassword, newPassword, confirmNewPassword } = this
 
-        const response = await request('put', '/users/password/change', {
+        const response = await api.put('/users/password/change', {
           currentPassword,
           newPassword,
           confirmNewPassword,

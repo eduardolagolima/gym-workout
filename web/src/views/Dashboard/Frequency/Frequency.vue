@@ -12,7 +12,7 @@ import { mapMutations } from 'vuex'
 
 import BarChart from '../../../components/Chart/BarChart'
 import DatePicker from '../../../components/Utils/DatePicker'
-import request from '../../../services/request'
+import api from '../../../services/api'
 
 export default {
   name: 'Frequency',
@@ -33,10 +33,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getFrequency() {
       try {
-        const response = await request(
-          'get',
-          `/dashboard/frequency/${this.year}`
-        )
+        const response = await api.get(`/dashboard/frequency/${this.year}`)
 
         const frequency = response.data.frequency
         const months = frequency.map(({ month }) => month)
