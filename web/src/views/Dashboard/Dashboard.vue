@@ -6,7 +6,7 @@
       <v-tab>{{ $t('views.dashboard.muscle_per_year.title') }}</v-tab>
     </v-tabs>
 
-    <v-tabs-items class="mt-3" v-model="tab">
+    <v-tabs-items v-model="tab" class="mt-3">
       <v-tab-item>
         <Frequency />
       </v-tab-item>
@@ -31,6 +31,12 @@ import MusclePerYear from './MusclePerYear/MusclePerYear'
 
 export default {
   name: 'Dashboard',
+  components: {
+    Content,
+    Frequency,
+    MusclePerMonth,
+    MusclePerYear,
+  },
   data: () => ({
     tab: null,
     key: 1,
@@ -40,12 +46,6 @@ export default {
     userLocale() {
       return this.user.locale
     },
-  },
-  components: {
-    Content,
-    Frequency,
-    MusclePerMonth,
-    MusclePerYear,
   },
   watch: {
     userLocale() {

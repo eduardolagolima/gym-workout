@@ -33,14 +33,14 @@
                   <ConfirmPasswordField
                     id="confirm-password"
                     :label="$t('views.register.confirm_password')"
-                    :matchRule="passwordMatchRule"
+                    :match-rule="passwordMatchRule"
                     :value.sync="confirmPassword"
                   />
                 </v-form>
               </v-card-text>
               <v-divider />
               <v-card-actions>
-                <v-btn @click="register" color="primary" :disabled="!validForm">
+                <v-btn color="primary" :disabled="!validForm" @click="register">
                   {{ $t('views.register.sign_up') }}
                 </v-btn>
                 <v-spacer />

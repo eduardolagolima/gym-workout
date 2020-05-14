@@ -1,10 +1,10 @@
 <template>
   <v-text-field
     :id="id"
+    v-model="email"
     :label="label"
     :name="id"
     type="email"
-    v-model="email"
     :rules="[emailRules.required, emailRules.valid]"
     required
   />
@@ -24,6 +24,7 @@ export default {
     },
     value: {
       type: String,
+      default: '',
     },
   },
   data: function() {
@@ -40,7 +41,7 @@ export default {
   computed: {
     email: {
       get() {
-        return this.value || ''
+        return this.value
       },
       set(newValue) {
         this.$emit('update:value', newValue)

@@ -13,18 +13,18 @@
         <v-btn v-on="on">{{ format(date) }}</v-btn>
       </template>
       <v-date-picker
-        :type="type === 'month' ? 'month' : 'date'"
         v-model="date"
-        @input="datepicker = false"
-        :max="currentDate().format(this[this.type].sys)"
+        :type="type === 'month' ? 'month' : 'date'"
+        :max="currentDate().format(type.sys)"
         :locale="user.locale.replace('_', '-')"
+        @input="datepicker = false"
       ></v-date-picker>
     </v-dialog>
     <v-btn v-else style="pointer-events: none">
       {{ format(date) }}
     </v-btn>
 
-    <v-btn class="ml-3" @click="add" :disabled="disableFutureDates()">
+    <v-btn class="ml-3" :disabled="disableFutureDates()" @click="add">
       <v-icon>mdi-chevron-right</v-icon>
     </v-btn>
   </div>
@@ -67,6 +67,14 @@ export default {
   computed: {
     ...mapState(['user']),
   },
+  watch: {
+    date() {
+      this.$emit('changeDate', this.date)
+    },
+  },
+  mounted() {
+    this.date = dayjs().format(this[this.type].sys)
+  },
   methods: {
     format(date) {
       return dayjs(date, this[this.type].sys).format(this[this.type].ptbr)
@@ -88,14 +96,6 @@ export default {
     currentDate() {
       return dayjs(dayjs().format(this[this.type].sys), this[this.type].sys)
     },
-  },
-  watch: {
-    date() {
-      this.$emit('changeDate', this.date)
-    },
-  },
-  mounted() {
-    this.date = dayjs().format(this[this.type].sys)
   },
 }
 </script>

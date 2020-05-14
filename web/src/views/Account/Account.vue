@@ -4,7 +4,7 @@
       <v-tab>{{ $t('views.account.edit_profile.title') }}</v-tab>
       <v-tab>{{ $t('views.account.change_password.title') }}</v-tab>
     </v-tabs>
-    <v-tabs-items class="mt-3" v-model="tab">
+    <v-tabs-items v-model="tab" class="mt-3">
       <v-tab-item>
         <EditProfile />
       </v-tab-item>

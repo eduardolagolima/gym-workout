@@ -4,6 +4,8 @@ const { reactiveProp } = mixins
 
 export default {
   name: 'BarChart',
+  extends: Bar,
+  mixins: [reactiveProp],
   data: () => ({
     options: {
       scales: {
@@ -25,8 +27,6 @@ export default {
       maintainAspectRatio: false,
     },
   }),
-  extends: Bar,
-  mixins: [reactiveProp],
   mounted() {
     this.renderChart(this.chartData, this.options)
   },

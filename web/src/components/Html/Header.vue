@@ -48,7 +48,7 @@
       <v-divider />
 
       <v-list dense>
-        <v-list-item @click="logout" link>
+        <v-list-item link @click="logout">
           <v-list-item-action>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-action>

@@ -1,14 +1,14 @@
 <template>
   <v-text-field
     :id="id"
+    v-model="confirmPassword"
     :label="label"
     :name="id"
     :type="showConfirmPassword ? 'text' : 'password'"
-    v-model="confirmPassword"
     :rules="[confirmPasswordRules.required, matchRule]"
     :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-    @click:append="showConfirmPassword = !showConfirmPassword"
     required
+    @click:append="showConfirmPassword = !showConfirmPassword"
   ></v-text-field>
 </template>
 
@@ -30,6 +30,7 @@ export default {
     },
     value: {
       type: String,
+      default: '',
     },
   },
   data: function() {
@@ -45,7 +46,7 @@ export default {
   computed: {
     confirmPassword: {
       get() {
-        return this.value || ''
+        return this.value
       },
       set(newValue) {
         this.$emit('update:value', newValue)

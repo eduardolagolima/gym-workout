@@ -23,7 +23,7 @@
             </v-card-text>
             <v-divider />
             <v-card-actions>
-              <v-btn @click="login" color="primary" :disabled="!validForm">
+              <v-btn color="primary" :disabled="!validForm" @click="login">
                 {{ $t('views.login.log_in') }}
               </v-btn>
               <v-spacer />

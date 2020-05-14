@@ -17,6 +17,10 @@ import request from '../../../services/request'
 
 export default {
   name: 'MusclePerMonth',
+  components: {
+    DatePicker,
+    BarChart,
+  },
   data: () => ({
     month: null,
     chartData: {},
@@ -26,9 +30,10 @@ export default {
       return muscleGroups.call(this)
     },
   },
-  components: {
-    DatePicker,
-    BarChart,
+  watch: {
+    month() {
+      this.getMusclePerMonth()
+    },
   },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
@@ -58,11 +63,6 @@ export default {
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }
-    },
-  },
-  watch: {
-    month() {
-      this.getMusclePerMonth()
     },
   },
 }

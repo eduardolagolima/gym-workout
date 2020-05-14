@@ -16,13 +16,18 @@ import request from '../../../services/request'
 
 export default {
   name: 'Frequency',
+  components: {
+    DatePicker,
+    BarChart,
+  },
   data: () => ({
     year: null,
     chartData: {},
   }),
-  components: {
-    DatePicker,
-    BarChart,
+  watch: {
+    year() {
+      this.getFrequency()
+    },
   },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
@@ -56,11 +61,6 @@ export default {
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }
-    },
-  },
-  watch: {
-    year() {
-      this.getFrequency()
     },
   },
 }

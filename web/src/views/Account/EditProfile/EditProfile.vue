@@ -21,7 +21,7 @@
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn @click="updateProfile" color="primary" :disabled="!validForm">
+      <v-btn color="primary" :disabled="!validForm" @click="updateProfile">
         {{ $t('views.account.edit_profile.save') }}
       </v-btn>
     </v-card-actions>
@@ -49,6 +49,9 @@ export default {
     name: '',
     email: '',
   }),
+  mounted() {
+    this.getProfile()
+  },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
     ...mapActions(['editProfile']),
@@ -75,9 +78,6 @@ export default {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }
     },
-  },
-  mounted() {
-    this.getProfile()
   },
 }
 </script>

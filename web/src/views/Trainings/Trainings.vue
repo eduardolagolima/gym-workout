@@ -1,10 +1,10 @@
 <template>
   <Content sm="8" md="6" lg="4">
-    <DatePicker type="day" @changeDate="day = $event" class="mb-3" />
-    <v-alert class="mb-3" v-if="trainedMuscleGroups.length > 0" type="success">
+    <DatePicker type="day" class="mb-3" @changeDate="day = $event" />
+    <v-alert v-if="trainedMuscleGroups.length > 0" class="mb-3" type="success">
       {{ $t('views.trainings.feedback.positive') }}
     </v-alert>
-    <v-alert class="mb-3" v-else type="error">
+    <v-alert v-else class="mb-3" type="error">
       {{ $t('views.trainings.feedback.negative') }}
     </v-alert>
     <v-card>
@@ -42,6 +42,10 @@ import request from '../../services/request'
 
 export default {
   name: 'Trainings',
+  components: {
+    Content,
+    DatePicker,
+  },
   data() {
     return {
       day: null,
@@ -53,9 +57,10 @@ export default {
       return muscleGroups.call(this)
     },
   },
-  components: {
-    Content,
-    DatePicker,
+  watch: {
+    day() {
+      this.getTrainedMuscleGroups()
+    },
   },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
@@ -76,11 +81,6 @@ export default {
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }
-    },
-  },
-  watch: {
-    day() {
-      this.getTrainedMuscleGroups()
     },
   },
 }

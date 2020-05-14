@@ -18,9 +18,22 @@ import Header from './Header'
 
 export default {
   name: 'Content',
-  props: ['sm', 'md', 'lg'],
   components: {
     Header,
+  },
+  props: {
+    sm: {
+      type: String,
+      default: null,
+    },
+    md: {
+      type: String,
+      default: null,
+    },
+    lg: {
+      type: String,
+      default: null,
+    },
   },
 }
 </script>

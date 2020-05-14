@@ -15,14 +15,14 @@
         <ConfirmPasswordField
           id="confirm-new-password"
           :label="$t('views.account.change_password.confirm_new_password')"
-          :matchRule="passwordMatchRule"
+          :match-rule="passwordMatchRule"
           :value.sync="confirmNewPassword"
         />
       </v-form>
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn @click="changePassword" color="primary" :disabled="!validForm">
+      <v-btn color="primary" :disabled="!validForm" @click="changePassword">
         {{ $t('views.account.change_password.save') }}
       </v-btn>
     </v-card-actions>
