@@ -1,5 +1,5 @@
 <template>
-  <Content :key="this.user.locale" sm="8" md="6" lg="4">
+  <Content :key="key" sm="8" md="6" lg="4">
     <v-tabs v-model="tab" center-active centered>
       <v-tab>{{ $t('views.account.edit_profile.title') }}</v-tab>
       <v-tab>{{ $t('views.account.change_password.title') }}</v-tab>
@@ -32,9 +32,20 @@ export default {
   },
   data: () => ({
     tab: null,
+    key: 1,
   }),
   computed: {
     ...mapState(['user']),
+    userLocale() {
+      return this.user.locale
+    },
+  },
+  watch: {
+    userLocale() {
+      if (this.user.token) {
+        this.key += 1
+      }
+    },
   },
 }
 </script>
