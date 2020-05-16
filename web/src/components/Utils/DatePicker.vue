@@ -46,6 +46,7 @@ export default {
     type: {
       type: String,
       required: true,
+      validator: type => ['day', 'month', 'year'].includes(type),
     },
   },
   data: () => ({
