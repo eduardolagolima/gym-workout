@@ -74,10 +74,9 @@ export default {
     },
     async updateTrainedMuscleGroups() {
       try {
-        const response = await api.put(`/trainings/${this.day}`, {
+        await api.put(`/trainings/${this.day}`, {
           trainedMuscleGroups: this.trainedMuscleGroups,
         })
-        this.trainedMuscleGroups = response.data.trainedMuscleGroups
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }

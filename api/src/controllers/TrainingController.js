@@ -21,16 +21,14 @@ module.exports = {
 
       if (!req.body.trainedMuscleGroups.length) {
         await Training.findOneAndRemove({ date: req.params.day })
-        return handleSuccess(res, { trainedMuscleGroups: [] })
+        return handleSuccess(res)
       }
 
-      const { trainedMuscleGroups } = await Training.findOneAndUpdate(
-        { date: req.params.day },
-        req.body,
-        { new: true, upsert: true }
-      )
+      await Training.findOneAndUpdate({ date: req.params.day }, req.body, {
+        upsert: true,
+      })
 
-      handleSuccess(res, { trainedMuscleGroups })
+      handleSuccess(res)
     } catch (error) {
       next(error)
     }
