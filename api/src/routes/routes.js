@@ -16,8 +16,7 @@ routes.use(auth)
 
 // Rotas que PRECISAM de autenticação
 routes.get('/dashboard/frequency/:year', DashboardController.frequency)
-routes.get('/dashboard/muscle/year/:year', DashboardController.musclePerYear)
-routes.get('/dashboard/muscle/month/:month', DashboardController.musclePerMonth)
+routes.get('/dashboard/muscle/:type/:date', DashboardController.muscle)
 
 routes.get('/trainings/:day', TrainingController.show)
 routes.put('/trainings/:day', TrainingController.update)

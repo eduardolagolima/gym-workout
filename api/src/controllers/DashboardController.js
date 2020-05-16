@@ -52,51 +52,11 @@ module.exports = {
     }
   },
 
-  async musclePerYear(req, res, next) {
+  async muscle(req, res, next) {
     try {
       const Training = await getModel(req.user._id, 'training', TrainingSchema)
 
-      const year = parseInt(req.params.year)
-
-      const trainings = await Training.aggregate([
-        {
-          $project: {
-            trainedMuscleGroups: '$trainedMuscleGroups',
-            year: { $year: '$date' },
-          },
-        },
-        {
-          $match: { year: year },
-        },
-      ])
-
-      const tmpMusclePerYear = {}
-
-      trainings.forEach(({ trainedMuscleGroups }) => {
-        trainedMuscleGroups.forEach(muscle => {
-          tmpMusclePerYear[muscle]
-            ? tmpMusclePerYear[muscle]++
-            : (tmpMusclePerYear[muscle] = 1)
-        })
-      })
-
-      const musclePerYear = {}
-
-      Object.keys(tmpMusclePerYear)
-        .sort()
-        .forEach(muscle => (musclePerYear[muscle] = tmpMusclePerYear[muscle]))
-
-      handleSuccess(res, { musclePerYear })
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async musclePerMonth(req, res, next) {
-    try {
-      const Training = await getModel(req.user._id, 'training', TrainingSchema)
-
-      let [year, month] = req.params.month.split('-')
+      let [year, month] = req.params.date.split('-')
       year = parseInt(year)
       month = parseInt(month)
 
@@ -111,28 +71,28 @@ module.exports = {
         {
           $match: {
             year: year,
-            month: month,
+            ...(month && {
+              month: month,
+            }),
           },
         },
       ])
 
-      const tmpMusclePerMonth = {}
+      const tmpMuscle = {}
 
       trainings.forEach(({ trainedMuscleGroups }) => {
-        trainedMuscleGroups.forEach(muscle => {
-          tmpMusclePerMonth[muscle]
-            ? tmpMusclePerMonth[muscle]++
-            : (tmpMusclePerMonth[muscle] = 1)
+        trainedMuscleGroups.forEach(value => {
+          tmpMuscle[value] ? tmpMuscle[value]++ : (tmpMuscle[value] = 1)
         })
       })
 
-      const musclePerMonth = {}
+      const muscle = {}
 
-      Object.keys(tmpMusclePerMonth)
+      Object.keys(tmpMuscle)
         .sort()
-        .forEach(muscle => (musclePerMonth[muscle] = tmpMusclePerMonth[muscle]))
+        .forEach(value => (muscle[value] = tmpMuscle[value]))
 
-      handleSuccess(res, { musclePerMonth })
+      handleSuccess(res, { muscle })
     } catch (error) {
       next(error)
     }

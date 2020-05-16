@@ -11,10 +11,10 @@
         <Frequency />
       </v-tab-item>
       <v-tab-item>
-        <MusclePerMonth />
+        <Muscle type="month" />
       </v-tab-item>
       <v-tab-item>
-        <MusclePerYear />
+        <Muscle type="year" />
       </v-tab-item>
     </v-tabs-items>
   </Content>
@@ -26,16 +26,14 @@ import { mapState } from 'vuex'
 import Content from '../../components/Html/Content'
 
 import Frequency from './Frequency/Frequency'
-import MusclePerMonth from './MusclePerMonth/MusclePerMonth'
-import MusclePerYear from './MusclePerYear/MusclePerYear'
+import Muscle from './Muscle/Muscle'
 
 export default {
   name: 'Dashboard',
   components: {
     Content,
     Frequency,
-    MusclePerMonth,
-    MusclePerYear,
+    Muscle,
   },
   data: () => ({
     tab: null,

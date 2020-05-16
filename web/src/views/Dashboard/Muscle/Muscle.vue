@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DatePicker class="py-3" type="month" @changeDate="month = $event" />
+    <DatePicker class="py-3" :type="type" @changeDate="date = $event" />
     <v-card>
       <BarChart :chart-data="chartData" />
     </v-card>
@@ -16,13 +16,20 @@ import muscleGroups from '../../../helpers/muscleGroups'
 import api from '../../../services/api'
 
 export default {
-  name: 'MusclePerMonth',
+  name: 'Muscle',
   components: {
     DatePicker,
     BarChart,
   },
+  props: {
+    type: {
+      type: String,
+      required: true,
+      validator: type => ['month', 'year'].includes(type),
+    },
+  },
   data: () => ({
-    month: null,
+    date: null,
     chartData: {},
   }),
   computed: {
@@ -31,19 +38,22 @@ export default {
     },
   },
   watch: {
-    month() {
-      this.getMusclePerMonth()
+    date() {
+      this.getMuscle()
     },
   },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
-    async getMusclePerMonth() {
+    async getMuscle() {
       try {
-        const response = await api.get(`/dashboard/muscle/month/${this.month}`)
+        const response = await api.get(
+          `/dashboard/muscle/${this.type}/${this.date}`
+        )
 
-        const musclePerMonth = response.data.musclePerMonth
+        const muscle = response.data.muscle
+
         const quantities = this.muscleGroups.map(({ value }) =>
-          musclePerMonth[value] ? musclePerMonth[value] : 0
+          muscle[value] ? muscle[value] : 0
         )
 
         this.chartData = {
