@@ -46,7 +46,7 @@ module.exports = {
         frequency.push({ month, daysInMonth, trainingDays })
       }
 
-      handleSuccess(res, { frequency })
+      return handleSuccess(res, { frequency })
     } catch (error) {
       next(error)
     }
@@ -92,7 +92,7 @@ module.exports = {
         .sort()
         .forEach(value => (muscle[value] = tmpMuscle[value]))
 
-      handleSuccess(res, { muscle })
+      return handleSuccess(res, { muscle })
     } catch (error) {
       next(error)
     }

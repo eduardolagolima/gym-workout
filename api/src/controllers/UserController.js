@@ -22,7 +22,7 @@ module.exports = {
         locale: user.locale,
       }
 
-      handleSuccess(res, data, 201, 'User created successfully.')
+      return handleSuccess(res, data, 201, 'User created successfully.')
     } catch (error) {
       next(error)
     }
@@ -43,7 +43,7 @@ module.exports = {
         locale: user.locale,
       }
 
-      handleSuccess(res, data)
+      return handleSuccess(res, data)
     } catch (error) {
       next(error)
     }
@@ -52,7 +52,7 @@ module.exports = {
   async show(req, res, next) {
     try {
       const { username, name, email } = req.user
-      handleSuccess(res, { user: { username, name, email } })
+      return handleSuccess(res, { user: { username, name, email } })
     } catch (error) {
       next(error)
     }
@@ -74,7 +74,7 @@ module.exports = {
         locale: user.locale,
       }
 
-      handleSuccess(res, data, 200, 'User updated successfully.')
+      return handleSuccess(res, data, 200, 'User updated successfully.')
     } catch (error) {
       next(error)
     }
@@ -112,7 +112,7 @@ module.exports = {
       user.password = newPassword
       user.save()
 
-      handleSuccess(res, null, 200, 'Password changed successfully.')
+      return handleSuccess(res, null, 200, 'Password changed successfully.')
     } catch (error) {
       next(error)
     }
@@ -124,7 +124,7 @@ module.exports = {
         return token.token !== req.token
       })
       await req.user.save()
-      handleSuccess(res, null, 204)
+      return handleSuccess(res, null, 204)
     } catch (error) {
       next(error)
     }
@@ -134,7 +134,7 @@ module.exports = {
     try {
       req.user.tokens.splice(0, req.user.tokens.length)
       await req.user.save()
-      handleSuccess(res, null, 204)
+      return handleSuccess(res, null, 204)
     } catch (error) {
       next(error)
     }

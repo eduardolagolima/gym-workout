@@ -9,7 +9,7 @@ module.exports = {
       const Training = await getModel(req.user._id, 'training', TrainingSchema)
       const training = await Training.findOne({ date: req.params.day })
       const trainedMuscleGroups = training ? training.trainedMuscleGroups : []
-      handleSuccess(res, { trainedMuscleGroups })
+      return handleSuccess(res, { trainedMuscleGroups })
     } catch (error) {
       next(error)
     }
@@ -28,7 +28,7 @@ module.exports = {
         upsert: true,
       })
 
-      handleSuccess(res)
+      return handleSuccess(res)
     } catch (error) {
       next(error)
     }
