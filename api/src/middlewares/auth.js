@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
-const UserSchema = require('../schemas/UserSchema')
-const getModel = require('../models/getModel')
+const User = require('../models/User')
+
 const { ErrorHandler } = require('../helpers/error')
 
 const auth = async (req, res, next) => {
@@ -11,8 +11,6 @@ const auth = async (req, res, next) => {
     if (url === '/users/login' || url === '/users/create') {
       return next()
     }
-
-    const User = await getModel('users', 'users', UserSchema)
 
     let token = req.header('Authorization')
 

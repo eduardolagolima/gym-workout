@@ -9,9 +9,7 @@ const auth = require('../middlewares/auth')
 const { users, user } = require('../middlewares/database')
 const { handleError } = require('../helpers/error')
 
-routes.use(auth)
-
-routes.use('/users', users)
+routes.use([users, auth])
 
 routes.post('/users/login', UserController.login)
 routes.post('/users/create', UserController.create)
