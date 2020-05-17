@@ -1,5 +1,4 @@
-const UserSchema = require('../schemas/UserSchema')
-const getModel = require('../models/getModel')
+const User = require('../models/User')
 
 const handleSuccess = require('../helpers/success')
 
@@ -7,9 +6,8 @@ const bcrypt = require('bcryptjs')
 const { ErrorHandler } = require('../helpers/error')
 
 module.exports = {
-  async store(req, res, next) {
+  async create(req, res, next) {
     try {
-      const User = await getModel('users', 'users', UserSchema)
       const user = new User(req.body)
       await user.save()
 
@@ -31,7 +29,6 @@ module.exports = {
   async login(req, res, next) {
     try {
       const { usernameOrEmail, password } = req.body
-      const User = await getModel('users', 'users', UserSchema)
       const user = await User.findByCredentials(usernameOrEmail, password)
 
       const token = await user.generateAuthToken()
@@ -60,7 +57,6 @@ module.exports = {
 
   async update(req, res, next) {
     try {
-      const User = await getModel('users', 'users', UserSchema)
       const user = await User.findOneAndUpdate(
         { _id: req.user._id },
         req.body,
@@ -107,7 +103,6 @@ module.exports = {
         )
       }
 
-      const User = await getModel('users', 'users', UserSchema)
       const user = await User.findOne({ _id: req.user._id })
       user.password = newPassword
       user.save()

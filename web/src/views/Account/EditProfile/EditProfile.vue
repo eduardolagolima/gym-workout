@@ -57,7 +57,7 @@ export default {
     ...mapActions(['editProfile']),
     async getProfile() {
       try {
-        const response = await api.get('/users')
+        const response = await api.get('/users/show')
         const user = response.data.user
 
         this.username = user.username

@@ -66,7 +66,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getTrainedMuscleGroups() {
       try {
-        const response = await api.get(`/trainings/${this.day}`)
+        const response = await api.get(`user/trainings/${this.day}`)
         this.trainedMuscleGroups = response.data.trainedMuscleGroups
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
@@ -74,7 +74,7 @@ export default {
     },
     async updateTrainedMuscleGroups() {
       try {
-        await api.put(`/trainings/${this.day}`, {
+        await api.put(`user/trainings/${this.day}`, {
           trainedMuscleGroups: this.trainedMuscleGroups,
         })
       } catch (error) {

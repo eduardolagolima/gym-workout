@@ -57,7 +57,7 @@ export default new Vuex.Store({
       )
     },
     async doRegister({ commit }, { username, name, email, password }) {
-      const response = await api.post('/users', {
+      const response = await api.post('/users/create', {
         username,
         name,
         email,
@@ -85,7 +85,7 @@ export default new Vuex.Store({
       commit('SET_USER_INFORMATION', getDefaultUserInformation())
     },
     async editProfile({ commit }, { username, name, email }) {
-      const response = await api.put('/users', {
+      const response = await api.put('/users/update', {
         username,
         name,
         email,
@@ -97,13 +97,13 @@ export default new Vuex.Store({
       return response
     },
     async toggleDarkMode({ commit }, darkMode) {
-      const response = await api.put('/users', { darkMode })
+      const response = await api.put('/users/update', { darkMode })
 
       localStorage.setItem('user', JSON.stringify(response.data))
       commit('SET_USER_INFORMATION', response.data)
     },
     async changeLocale({ commit }, locale) {
-      const response = await api.put('/users', { locale })
+      const response = await api.put('/users/update', { locale })
 
       localStorage.setItem('user', JSON.stringify(response.data))
       commit('SET_USER_INFORMATION', response.data)

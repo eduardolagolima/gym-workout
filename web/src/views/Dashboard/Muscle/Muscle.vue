@@ -47,7 +47,7 @@ export default {
     async getMuscle() {
       try {
         const response = await api.get(
-          `/dashboard/muscle/${this.type}/${this.date}`
+          `user/dashboard/muscle/${this.type}/${this.date}`
         )
 
         const muscle = response.data.muscle

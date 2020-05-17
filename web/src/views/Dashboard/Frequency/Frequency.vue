@@ -33,7 +33,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getFrequency() {
       try {
-        const response = await api.get(`/dashboard/frequency/${this.year}`)
+        const response = await api.get(`user/dashboard/frequency/${this.year}`)
 
         const frequency = response.data.frequency
         const months = frequency.map(({ month }) => month)

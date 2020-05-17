@@ -6,6 +6,12 @@ const { ErrorHandler } = require('../helpers/error')
 
 const auth = async (req, res, next) => {
   try {
+    const url = req.originalUrl
+
+    if (url === '/users/login' || url === '/users/create') {
+      return next()
+    }
+
     const User = await getModel('users', 'users', UserSchema)
 
     let token = req.header('Authorization')

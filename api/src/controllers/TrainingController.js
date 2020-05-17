@@ -1,12 +1,10 @@
-const TrainingSchema = require('../schemas/TrainingSchema')
-const getModel = require('../models/getModel')
+const Training = require('../models/Training')
 
 const handleSuccess = require('../helpers/success')
 
 module.exports = {
   async show(req, res, next) {
     try {
-      const Training = await getModel(req.user._id, 'training', TrainingSchema)
       const training = await Training.findOne({ date: req.params.day })
       const trainedMuscleGroups = training ? training.trainedMuscleGroups : []
       return handleSuccess(res, { trainedMuscleGroups })
@@ -17,8 +15,6 @@ module.exports = {
 
   async update(req, res, next) {
     try {
-      const Training = await getModel(req.user._id, 'training', TrainingSchema)
-
       if (!req.body.trainedMuscleGroups.length) {
         await Training.findOneAndRemove({ date: req.params.day })
         return handleSuccess(res)

@@ -1,15 +1,12 @@
 const dayjs = require('dayjs')
 
-const TrainingSchema = require('../schemas/TrainingSchema')
-const getModel = require('../models/getModel')
+const Training = require('../models/Training')
 
 const handleSuccess = require('../helpers/success')
 
 module.exports = {
   async frequency(req, res, next) {
     try {
-      const Training = await getModel(req.user._id, 'training', TrainingSchema)
-
       const year = parseInt(req.params.year)
 
       const trainings = await Training.aggregate([
@@ -54,8 +51,6 @@ module.exports = {
 
   async muscle(req, res, next) {
     try {
-      const Training = await getModel(req.user._id, 'training', TrainingSchema)
-
       let [year, month] = req.params.date.split('-')
       year = parseInt(year)
       month = parseInt(month)
