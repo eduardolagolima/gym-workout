@@ -15,9 +15,9 @@ routes.post('/users/login', UserController.login)
 routes.post('/users/create', UserController.create)
 routes.get('/users/show', UserController.show)
 routes.put('/users/update', UserController.update)
-routes.put('/users/password/change', UserController.passwordChange)
+routes.put('/users/password/change', UserController.changePassword)
 routes.post('/users/logout', UserController.logout)
-routes.post('/users/logoutall', UserController.logoutall)
+routes.post('/users/logout/all', UserController.logoutAll)
 
 routes.use('/user', user)
 

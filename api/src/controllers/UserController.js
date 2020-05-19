@@ -76,7 +76,7 @@ module.exports = {
     }
   },
 
-  async passwordChange(req, res, next) {
+  async changePassword(req, res, next) {
     try {
       const { currentPassword, newPassword, confirmNewPassword } = req.body
 
@@ -125,7 +125,7 @@ module.exports = {
     }
   },
 
-  async logoutall(req, res, next) {
+  async logoutAll(req, res, next) {
     try {
       req.user.tokens.splice(0, req.user.tokens.length)
       await req.user.save()
