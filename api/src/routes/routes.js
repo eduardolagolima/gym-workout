@@ -21,11 +21,11 @@ routes.post('/users/logoutall', UserController.logoutall)
 
 routes.use('/user', user)
 
-routes.get('/user/dashboard/frequency/:year', DashboardController.frequency)
+routes.get('/user/dashboard/frequency/:date', DashboardController.frequency)
 routes.get('/user/dashboard/muscle/:type/:date', DashboardController.muscle)
 
-routes.get('/user/trainings/:day', TrainingController.show)
-routes.put('/user/trainings/:day', TrainingController.update)
+routes.get('/user/trainings/:date', TrainingController.show)
+routes.put('/user/trainings/:date', TrainingController.update)
 
 routes.use((error, req, res, next) => {
   handleError(error, res)

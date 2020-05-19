@@ -1,6 +1,6 @@
 <template>
   <Content sm="8" md="6" lg="4">
-    <DatePicker type="day" class="mb-3" @changeDate="day = $event" />
+    <DatePicker type="day" class="mb-3" @changeDate="date = $event" />
     <v-alert v-if="trainedMuscleGroups.length > 0" class="mb-3" type="success">
       {{ $t('views.trainings.feedback.positive') }}
     </v-alert>
@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      day: null,
+      date: null,
       trainedMuscleGroups: [],
     }
   },
@@ -58,7 +58,7 @@ export default {
     },
   },
   watch: {
-    day() {
+    date() {
       this.getTrainedMuscleGroups()
     },
   },
@@ -66,7 +66,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getTrainedMuscleGroups() {
       try {
-        const response = await api.get(`user/trainings/${this.day}`)
+        const response = await api.get(`user/trainings/${this.date}`)
         this.trainedMuscleGroups = response.data.trainedMuscleGroups
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
@@ -74,7 +74,7 @@ export default {
     },
     async updateTrainedMuscleGroups() {
       try {
-        await api.put(`user/trainings/${this.day}`, {
+        await api.put(`user/trainings/${this.date}`, {
           trainedMuscleGroups: this.trainedMuscleGroups,
         })
       } catch (error) {

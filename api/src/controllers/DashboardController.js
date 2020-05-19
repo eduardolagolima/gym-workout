@@ -7,7 +7,7 @@ const handleSuccess = require('../helpers/success')
 module.exports = {
   async frequency(req, res, next) {
     try {
-      const year = parseInt(req.params.year)
+      const year = parseInt(req.params.date)
 
       const trainings = await Training.aggregate([
         {
