@@ -21,9 +21,9 @@ const create = async (req, res, next) => {
   }
 }
 
-const show = async (req, res, next) => {
+const getProfile = async (req, res, next) => {
   try {
-    const data = await UserService.show(req.user)
+    const data = await UserService.getProfile(req.user)
     return handleSuccess(res, data)
   } catch (error) {
     next(error)
@@ -75,7 +75,7 @@ const logoutAll = async (req, res, next) => {
 module.exports = {
   login,
   create,
-  show,
+  getProfile,
   update,
   changePassword,
   logout,

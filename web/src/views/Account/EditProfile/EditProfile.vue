@@ -57,12 +57,10 @@ export default {
     ...mapActions(['editProfile']),
     async getProfile() {
       try {
-        const response = await api.get('/users/show')
-        const user = response.data.user
-
-        this.username = user.username
-        this.name = user.name
-        this.email = user.email
+        const response = await api.get('/users/profile')
+        this.username = response.data.username
+        this.name = response.data.name
+        this.email = response.data.email
       } catch (error) {
         this.SHOW_SNACKBAR({ show: true, content: error.message })
       }

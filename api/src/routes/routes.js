@@ -13,7 +13,7 @@ routes.use([users, auth])
 
 routes.post('/users/login', UserController.login)
 routes.post('/users/create', UserController.create)
-routes.get('/users/show', UserController.show)
+routes.get('/users/profile', UserController.getProfile)
 routes.put('/users/update', UserController.update)
 routes.put('/users/password/change', UserController.changePassword)
 routes.post('/users/logout', UserController.logout)

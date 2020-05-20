@@ -26,13 +26,11 @@ const create = async (username, name, email, password) => {
   }
 }
 
-const show = async user => {
+const getProfile = async user => {
   return {
-    user: {
-      username: user.username,
-      name: user.name,
-      email: user.email,
-    },
+    username: user.username,
+    name: user.name,
+    email: user.email,
   }
 }
 
@@ -94,7 +92,7 @@ const logoutAll = async req => {
 module.exports = {
   login,
   create,
-  show,
+  getProfile,
   update,
   changePassword,
   logout,
