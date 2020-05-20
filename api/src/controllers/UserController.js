@@ -30,10 +30,29 @@ const getProfile = async (req, res, next) => {
   }
 }
 
-const update = async (req, res, next) => {
+const editProfile = async (req, res, next) => {
   try {
-    const data = await UserService.update(req)
-    return handleSuccess(res, data, 200, 'User updated successfully.')
+    const { username, name, email } = req.body
+    await UserService.editProfile(req.user, username, name, email)
+    return handleSuccess(res, null, 200, 'Profile updated successfully.')
+  } catch (error) {
+    next(error)
+  }
+}
+
+const toggleDarkMode = async (req, res, next) => {
+  try {
+    await UserService.toggleDarkMode(req.user, req.body.darkMode)
+    return handleSuccess(res)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const changeLocale = async (req, res, next) => {
+  try {
+    await UserService.changeLocale(req.user, req.body.locale)
+    return handleSuccess(res)
   } catch (error) {
     next(error)
   }
@@ -76,7 +95,9 @@ module.exports = {
   login,
   create,
   getProfile,
-  update,
+  editProfile,
+  toggleDarkMode,
+  changeLocale,
   changePassword,
   logout,
   logoutAll,

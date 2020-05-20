@@ -34,17 +34,21 @@ const getProfile = async user => {
   }
 }
 
-const update = async req => {
-  const user = await User.findOneAndUpdate({ _id: req.user._id }, req.body, {
-    new: true,
-  })
+const editProfile = async (user, username, name, email) => {
+  user.username = username
+  user.name = name
+  user.email = email
+  user.save()
+}
 
-  return {
-    name: user.name,
-    darkMode: user.darkMode,
-    locale: user.locale,
-    token: req.token,
-  }
+const toggleDarkMode = async (user, darkMode) => {
+  user.darkMode = darkMode
+  user.save()
+}
+
+const changeLocale = async (user, locale) => {
+  user.locale = locale
+  user.save()
 }
 
 const changePassword = async (
@@ -93,7 +97,9 @@ module.exports = {
   login,
   create,
   getProfile,
-  update,
+  editProfile,
+  toggleDarkMode,
+  changeLocale,
   changePassword,
   logout,
   logoutAll,
