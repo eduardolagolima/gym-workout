@@ -1,137 +1,83 @@
-const User = require('../models/User')
-
+const UserService = require('../services/UserService')
 const handleSuccess = require('../helpers/success')
 
-const bcrypt = require('bcryptjs')
-const { ErrorHandler } = require('../helpers/error')
+const login = async (req, res, next) => {
+  try {
+    const { usernameOrEmail, password } = req.body
+    const data = await UserService.login(usernameOrEmail, password)
+    return handleSuccess(res, data)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const create = async (req, res, next) => {
+  try {
+    const { username, name, email, password } = req.body
+    const data = await UserService.create(username, name, email, password)
+    return handleSuccess(res, data, 201, 'User created successfully.')
+  } catch (error) {
+    next(error)
+  }
+}
+
+const show = async (req, res, next) => {
+  try {
+    const data = await UserService.show(req.user)
+    return handleSuccess(res, data)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const update = async (req, res, next) => {
+  try {
+    const data = await UserService.update(req)
+    return handleSuccess(res, data, 200, 'User updated successfully.')
+  } catch (error) {
+    next(error)
+  }
+}
+
+const changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword, confirmNewPassword } = req.body
+    await UserService.changePassword(
+      req.user,
+      currentPassword,
+      newPassword,
+      confirmNewPassword
+    )
+    return handleSuccess(res, null, 200, 'Password changed successfully.')
+  } catch (error) {
+    next(error)
+  }
+}
+
+const logout = async (req, res, next) => {
+  try {
+    await UserService.logout(req)
+    return handleSuccess(res, null, 204)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const logoutAll = async (req, res, next) => {
+  try {
+    await UserService.logoutAll(req)
+    return handleSuccess(res, null, 204)
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = {
-  async create(req, res, next) {
-    try {
-      const user = new User(req.body)
-      await user.save()
-
-      const token = await user.generateAuthToken()
-
-      const data = {
-        name: user.name,
-        token,
-        darkMode: user.darkMode,
-        locale: user.locale,
-      }
-
-      return handleSuccess(res, data, 201, 'User created successfully.')
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async login(req, res, next) {
-    try {
-      const { usernameOrEmail, password } = req.body
-      const user = await User.findByCredentials(usernameOrEmail, password)
-
-      const token = await user.generateAuthToken()
-
-      const data = {
-        name: user.name,
-        token,
-        darkMode: user.darkMode,
-        locale: user.locale,
-      }
-
-      return handleSuccess(res, data)
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async show(req, res, next) {
-    try {
-      const { username, name, email } = req.user
-      return handleSuccess(res, { user: { username, name, email } })
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async update(req, res, next) {
-    try {
-      const user = await User.findOneAndUpdate(
-        { _id: req.user._id },
-        req.body,
-        { new: true }
-      )
-
-      const data = {
-        name: user.name,
-        token: req.token,
-        darkMode: user.darkMode,
-        locale: user.locale,
-      }
-
-      return handleSuccess(res, data, 200, 'User updated successfully.')
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async changePassword(req, res, next) {
-    try {
-      const { currentPassword, newPassword, confirmNewPassword } = req.body
-
-      const isPasswordMatch = await bcrypt.compare(
-        currentPassword,
-        req.user.password
-      )
-
-      if (!isPasswordMatch) {
-        throw new ErrorHandler(
-          400,
-          'Your old password was entered incorrectly. Please enter it again.'
-        )
-      }
-
-      if (newPassword !== confirmNewPassword) {
-        throw new ErrorHandler(400, 'Please make sure both passwords match.')
-      }
-
-      if (newPassword === currentPassword) {
-        throw new ErrorHandler(
-          400,
-          `Create a new password that isn't your current password.`
-        )
-      }
-
-      const user = await User.findOne({ _id: req.user._id })
-      user.password = newPassword
-      user.save()
-
-      return handleSuccess(res, null, 200, 'Password changed successfully.')
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async logout(req, res, next) {
-    try {
-      req.user.tokens = req.user.tokens.filter(token => {
-        return token.token !== req.token
-      })
-      await req.user.save()
-      return handleSuccess(res, null, 204)
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async logoutAll(req, res, next) {
-    try {
-      req.user.tokens.splice(0, req.user.tokens.length)
-      await req.user.save()
-      return handleSuccess(res, null, 204)
-    } catch (error) {
-      next(error)
-    }
-  },
+  login,
+  create,
+  show,
+  update,
+  changePassword,
+  logout,
+  logoutAll,
 }

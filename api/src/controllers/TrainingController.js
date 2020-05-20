@@ -1,32 +1,25 @@
-const Training = require('../models/Training')
-
+const TrainingService = require('../services/TrainingService')
 const handleSuccess = require('../helpers/success')
 
+const show = async (req, res, next) => {
+  try {
+    const data = await TrainingService.show(req.params.date)
+    return handleSuccess(res, data)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const update = async (req, res, next) => {
+  try {
+    await TrainingService.update(req.params.date, req.body.trainedMuscleGroups)
+    return handleSuccess(res)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
-  async show(req, res, next) {
-    try {
-      const training = await Training.findOne({ date: req.params.date })
-      const trainedMuscleGroups = training ? training.trainedMuscleGroups : []
-      return handleSuccess(res, { trainedMuscleGroups })
-    } catch (error) {
-      next(error)
-    }
-  },
-
-  async update(req, res, next) {
-    try {
-      if (!req.body.trainedMuscleGroups.length) {
-        await Training.findOneAndRemove({ date: req.params.date })
-        return handleSuccess(res)
-      }
-
-      await Training.findOneAndUpdate({ date: req.params.date }, req.body, {
-        upsert: true,
-      })
-
-      return handleSuccess(res)
-    } catch (error) {
-      next(error)
-    }
-  },
+  show,
+  update,
 }
