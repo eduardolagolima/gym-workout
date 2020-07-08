@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     type="text"
-    :rules="[usernameRules.required, usernameRules.valid]"
     required
   />
 </template>
@@ -26,18 +25,6 @@ export default {
       type: String,
       default: '',
     },
-  },
-  data: function() {
-    return {
-      usernameRules: {
-        required: username =>
-          !!username ||
-          `${this.label} ${this.$t('generics.rules.is_required')}`,
-        valid: username =>
-          /^[a-z0-9]+$/.test(username) ||
-          `${this.label} ${this.$t('generics.rules.only_letters_and_numbers')}`,
-      },
-    }
   },
   computed: {
     username: {

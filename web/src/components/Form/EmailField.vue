@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     type="email"
-    :rules="[emailRules.required, emailRules.valid]"
     required
   />
 </template>
@@ -26,17 +25,6 @@ export default {
       type: String,
       default: '',
     },
-  },
-  data: function() {
-    return {
-      emailRules: {
-        required: email =>
-          !!email || `${this.label} ${this.$t('generics.rules.is_required')}`,
-        valid: email =>
-          /.+@.+\..+/.test(email) ||
-          `${this.label} ${this.$t('generics.rules.must_be_valid')}`,
-      },
-    }
   },
   computed: {
     email: {

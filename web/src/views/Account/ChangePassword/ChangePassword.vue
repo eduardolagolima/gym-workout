@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-form ref="form" v-model="validForm">
+      <v-form ref="form">
         <PasswordField
           id="current-password"
           :label="$t('views.account.change_password.current_password')"
@@ -15,14 +15,13 @@
         <ConfirmPasswordField
           id="confirm-new-password"
           :label="$t('views.account.change_password.confirm_new_password')"
-          :match-rule="passwordMatchRule"
           :value.sync="confirmNewPassword"
         />
       </v-form>
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn color="primary" :disabled="!validForm" @click="changePassword">
+      <v-btn color="primary" @click="changePassword">
         {{ $t('views.account.change_password.save') }}
       </v-btn>
     </v-card-actions>
@@ -34,7 +33,6 @@ import { mapMutations } from 'vuex'
 
 import ConfirmPasswordField from '../../../components/Form/ConfirmPasswordField'
 import PasswordField from '../../../components/Form/PasswordField'
-import passwordMatchRule from '../../../helpers/passwordMatchRule'
 import api from '../../../services/api'
 
 export default {
@@ -44,20 +42,10 @@ export default {
     ConfirmPasswordField,
   },
   data: () => ({
-    validForm: false,
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: '',
   }),
-  computed: {
-    passwordMatchRule() {
-      return passwordMatchRule.call(
-        this,
-        this.newPassword,
-        this.confirmNewPassword
-      )
-    },
-  },
   methods: {
     ...mapMutations(['SHOW_SNACKBAR']),
     async changePassword() {

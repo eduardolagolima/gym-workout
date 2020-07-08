@@ -8,7 +8,7 @@
               <v-toolbar-title>gym-workout</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
-              <v-form v-model="validForm">
+              <v-form>
                 <UsernameOrEmailField
                   id="username-or-email"
                   :label="$t('views.login.username_or_email')"
@@ -23,7 +23,7 @@
             </v-card-text>
             <v-divider />
             <v-card-actions>
-              <v-btn color="primary" :disabled="!validForm" @click="login">
+              <v-btn color="primary" @click="login">
                 {{ $t('views.login.log_in') }}
               </v-btn>
               <v-spacer />
@@ -35,8 +35,8 @@
               </p>
             </v-card-actions>
           </v-card>
-          <v-alert v-show="alertMessage" class="mt-4" :type="alertType">
-            {{ alertMessage }}
+          <v-alert v-show="alert.message" class="mt-4" :type="alert.type">
+            {{ alert.message }}
           </v-alert>
         </v-col>
       </v-row>
@@ -56,17 +56,18 @@ export default {
     PasswordField,
   },
   data: () => ({
-    validForm: false,
     usernameOrEmail: '',
     password: '',
-    alertMessage: null,
-    alertType: null,
+    alert: {
+      message: null,
+      type: null,
+    },
   }),
   methods: {
     ...mapActions(['doLogin']),
     async login() {
-      this.alertMessage = null
-      this.alertType = null
+      this.alert.message = null
+      this.alert.type = null
 
       const { usernameOrEmail, password } = this
 
@@ -74,8 +75,8 @@ export default {
         await this.doLogin({ usernameOrEmail, password })
         this.$router.push('/dashboard')
       } catch (error) {
-        this.alertMessage = error.message
-        this.alertType = error.status
+        this.alert.message = error.message
+        this.alert.type = error.status
       }
     },
   },

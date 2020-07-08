@@ -66,10 +66,6 @@ const changePassword = async (
     )
   }
 
-  if (newPassword !== confirmNewPassword) {
-    throw new ErrorHandler(400, 'Please make sure both passwords match.')
-  }
-
   if (newPassword === currentPassword) {
     throw new ErrorHandler(
       400,

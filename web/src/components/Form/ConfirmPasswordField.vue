@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     :type="showConfirmPassword ? 'text' : 'password'"
-    :rules="[confirmPasswordRules.required, matchRule]"
     :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
     required
     @click:append="showConfirmPassword = !showConfirmPassword"
@@ -24,25 +23,14 @@ export default {
       type: String,
       required: true,
     },
-    matchRule: {
-      type: Function,
-      required: true,
-    },
     value: {
       type: String,
       default: '',
     },
   },
-  data: function() {
-    return {
-      confirmPasswordRules: {
-        required: confirmPassword =>
-          !!confirmPassword ||
-          `${this.label} ${this.$t('generics.rules.is_required')}`,
-      },
-      showConfirmPassword: false,
-    }
-  },
+  data: () => ({
+    showConfirmPassword: false,
+  }),
   computed: {
     confirmPassword: {
       get() {

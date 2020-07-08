@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     type="text"
-    :rules="[nameRules.required]"
     required
   />
 </template>
@@ -26,14 +25,6 @@ export default {
       type: String,
       default: '',
     },
-  },
-  data: function() {
-    return {
-      nameRules: {
-        required: name =>
-          !!name || `${this.label} ${this.$t('generics.rules.is_required')}`,
-      },
-    }
   },
   computed: {
     name: {

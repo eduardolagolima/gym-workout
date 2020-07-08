@@ -12,12 +12,6 @@
       "quads": "Quads",
       "shoulder": "Shoulder",
       "triceps": "Triceps"
-    },
-    "rules": {
-      "is_required": "is required",
-      "must_be_valid": "must be valid",
-      "only_letters_and_numbers": "can contain only letters and numbers",
-      "password_must_match": "Password must match"
     }
   },
   "components": {

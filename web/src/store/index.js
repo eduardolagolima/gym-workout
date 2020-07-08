@@ -53,12 +53,16 @@ export default new Vuex.Store({
     async getUser({ commit }) {
       commit('SET_USER', JSON.parse(localStorage.getItem('user')) || {})
     },
-    async doRegister({ commit, state }, { username, name, email, password }) {
+    async doRegister(
+      { commit, state },
+      { username, name, email, password, confirmPassword }
+    ) {
       const response = await api.post('/users/create', {
         username,
         name,
         email,
         password,
+        confirmPassword,
       })
 
       commit('SET_USER', response.data)

@@ -46,9 +46,7 @@ export default {
     ...mapMutations(['SHOW_SNACKBAR']),
     async getMuscle() {
       try {
-        const response = await api.get(
-          `user/dashboard/muscle/${this.type}/${this.date}`
-        )
+        const response = await api.get(`user/dashboard/muscle/${this.date}`)
 
         const muscle = response.data.muscle
 

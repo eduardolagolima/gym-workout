@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-form v-model="validForm">
+      <v-form>
         <UsernameField
           id="username"
           :label="$t('views.account.edit_profile.username')"
@@ -21,7 +21,7 @@
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn color="primary" :disabled="!validForm" @click="updateProfile">
+      <v-btn color="primary" @click="updateProfile">
         {{ $t('views.account.edit_profile.save') }}
       </v-btn>
     </v-card-actions>
@@ -44,7 +44,6 @@ export default {
     EmailField,
   },
   data: () => ({
-    validForm: false,
     username: '',
     name: '',
     email: '',

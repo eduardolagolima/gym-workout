@@ -12,12 +12,6 @@
       "quads": "Quadríceps",
       "shoulder": "Ombros",
       "triceps": "Tríceps"
-    },
-    "rules": {
-      "is_required": "é obrigatório",
-      "must_be_valid": "deve ser válido",
-      "only_letters_and_numbers": "deve conter apenas letras e números",
-      "password_must_match": "A senha deve corresponder"
     }
   },
   "components": {

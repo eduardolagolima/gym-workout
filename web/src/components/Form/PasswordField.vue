@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     :type="showPassword ? 'text' : 'password'"
-    :rules="[passwordRules.required]"
     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
     required
     @click:append="showPassword = !showPassword"
@@ -29,16 +28,9 @@ export default {
       default: '',
     },
   },
-  data: function() {
-    return {
-      passwordRules: {
-        required: password =>
-          !!password ||
-          `${this.label} ${this.$t('generics.rules.is_required')}`,
-      },
-      showPassword: false,
-    }
-  },
+  data: () => ({
+    showPassword: false,
+  }),
   computed: {
     password: {
       get: function() {

@@ -5,7 +5,6 @@
     :label="label"
     :name="id"
     type="text"
-    :rules="[usernameOrEmailRules.required]"
     required
   />
 </template>
@@ -26,15 +25,6 @@ export default {
       type: String,
       default: '',
     },
-  },
-  data: function() {
-    return {
-      usernameOrEmailRules: {
-        required: usernameOrEmail =>
-          !!usernameOrEmail ||
-          `${this.label} ${this.$t('generics.rules.is_required')}`,
-      },
-    }
   },
   computed: {
     usernameOrEmail: {

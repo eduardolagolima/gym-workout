@@ -9,7 +9,7 @@
                 <v-toolbar-title>gym-workout</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form v-model="validForm">
+                <v-form>
                   <UsernameField
                     id="username"
                     :label="$t('views.register.username')"
@@ -33,14 +33,13 @@
                   <ConfirmPasswordField
                     id="confirm-password"
                     :label="$t('views.register.confirm_password')"
-                    :match-rule="passwordMatchRule"
                     :value.sync="confirmPassword"
                   />
                 </v-form>
               </v-card-text>
               <v-divider />
               <v-card-actions>
-                <v-btn color="primary" :disabled="!validForm" @click="register">
+                <v-btn color="primary" @click="register">
                   {{ $t('views.register.sign_up') }}
                 </v-btn>
                 <v-spacer />
@@ -52,8 +51,8 @@
                 </p>
               </v-card-actions>
             </v-card>
-            <v-alert v-show="alertMessage" class="mt-4" :type="alertType">
-              {{ alertMessage }}
+            <v-alert v-show="alert.message" class="mt-4" :type="alert.type">
+              {{ alert.message }}
             </v-alert>
           </v-col>
         </v-row>
@@ -70,7 +69,6 @@ import EmailField from '../../components/Form/EmailField'
 import NameField from '../../components/Form/NameField'
 import PasswordField from '../../components/Form/PasswordField'
 import UsernameField from '../../components/Form/UsernameField'
-import passwordMatchRule from '../../helpers/passwordMatchRule'
 
 export default {
   name: 'Register',
@@ -82,28 +80,23 @@ export default {
     ConfirmPasswordField,
   },
   data: () => ({
-    validForm: false,
     username: '',
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    showConfirmPassword: false,
-    alertMessage: null,
-    alertType: null,
-  }),
-  computed: {
-    passwordMatchRule() {
-      return passwordMatchRule.call(this, this.password, this.confirmPassword)
+    alert: {
+      message: null,
+      type: null,
     },
-  },
+  }),
   methods: {
     ...mapActions(['doRegister']),
     async register() {
-      this.alertMessage = null
-      this.alertType = null
+      this.alert.message = null
+      this.alert.type = null
 
-      const { username, name, email, password } = this
+      const { username, name, email, password, confirmPassword } = this
 
       try {
         const response = await this.doRegister({
@@ -111,15 +104,16 @@ export default {
           name,
           email,
           password,
+          confirmPassword,
         })
 
-        this.alertMessage = response.message
-        this.alertType = response.status
+        this.alert.message = response.message
+        this.alert.type = response.status
 
         setTimeout(() => this.$router.push('/dashboard'), 1000)
       } catch (error) {
-        this.alertMessage = error.message
-        this.alertType = error.status
+        this.alert.message = error.message
+        this.alert.type = error.status
       }
     },
   },
