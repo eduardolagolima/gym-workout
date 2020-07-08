@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <v-content>
+    <v-main>
       <v-container fluid>
         <v-row no-gutters justify="center">
           <v-col cols="12" :sm="sm" :md="md" :lg="lg">
@@ -9,7 +9,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </div>
 </template>
 
