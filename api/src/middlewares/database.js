@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const connect = async database => {
+  await mongoose.disconnect()
   await mongoose.connect(`${process.env.MONGODB_URL}/${database}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -9,7 +10,7 @@ const connect = async database => {
   })
 }
 
-const users = async (req, res, next) => {
+const connectUsers = async (req, res, next) => {
   try {
     await connect('users')
     next()
@@ -18,7 +19,7 @@ const users = async (req, res, next) => {
   }
 }
 
-const user = async (req, res, next) => {
+const connectUser = async (req, res, next) => {
   try {
     await connect(req.user._id)
     next()
@@ -28,6 +29,6 @@ const user = async (req, res, next) => {
 }
 
 module.exports = {
-  users,
-  user,
+  connectUsers,
+  connectUser,
 }
